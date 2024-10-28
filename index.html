@@ -1,0 +1,28 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp QR Code</title>
+    <style>
+        img {
+            width: 300px; /* Adjust as needed */
+            height: 300px; /* Adjust as needed */
+        }
+    </style>
+</head>
+<body>
+    <h1>Scan the QR Code</h1>
+    <img id="qrCode" src="" alt="QR Code" />
+    <script>
+        async function fetchQRCode() {
+            const response = await fetch('/qr');
+            const qrCodeDataUrl = await response.text();
+            document.getElementById('qrCode').src = qrCodeDataUrl;
+        }
+
+        // Fetch QR code on page load
+        window.onload = fetchQRCode;
+    </script>
+</body>
+</html>
