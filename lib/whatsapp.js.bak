@@ -1,0 +1,16 @@
+const { default: makeWASocket } = require('@whiskeysockets/baileys');
+const { initializeAuth } = require('./auth');
+const { setupEvents } = require('./events');
+
+async function connectToWhatsApp() {
+    const { state, saveCreds } = await initializeAuth();
+
+    const conn = makeWASocket({
+        auth: state,
+    });
+
+    conn.auth = { saveCreds };
+    setupEvents(conn);
+}
+
+module.exports = { connectToWhatsApp };
